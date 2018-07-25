@@ -16,10 +16,11 @@ public class FileSystemDeleteTest {
   
   @Before
   public void setUp() throws Exception {
+    System.setProperty("hadoop.home.dir","F:\\cuixueyong\\install\\hadoop\\hadoop-2.7.6");
     fs = FileSystem.get(new Configuration());
     writeFile(fs, new Path("dir/file"));
   }
-  
+
   private void writeFile(FileSystem fileSys, Path name) throws IOException {
     FSDataOutputStream stm = fileSys.create(name);
     stm.close();

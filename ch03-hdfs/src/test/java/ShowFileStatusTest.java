@@ -12,20 +12,22 @@ import org.junit.*;
 
 // vv ShowFileStatusTest
 public class ShowFileStatusTest {
-  
+
+  private String pathString = "dir/file";
   private MiniDFSCluster cluster; // use an in-process HDFS cluster for testing
   private FileSystem fs;
 
   // 首先创建文件
   @Before
   public void setUp() throws IOException {
+    System.setProperty("hadoop.home.dir","F:\\cuixueyong\\install\\hadoop\\hadoop-2.7.6");
     Configuration conf = new Configuration();
     if (System.getProperty("test.build.data") == null) {
       System.setProperty("test.build.data", "/tmp");
     }
     cluster = new MiniDFSCluster.Builder(conf).build();
     fs = cluster.getFileSystem();
-    OutputStream out = fs.create(new Path("/dir/file"));
+    OutputStream out = fs.create(new Path(pathString));
     out.write("content".getBytes("UTF-8"));
     out.close();
   }
@@ -43,9 +45,9 @@ public class ShowFileStatusTest {
   
   @Test
   public void fileStatusForFile() throws IOException {
-    Path file = new Path("/dir/file");
+    Path file = new Path(pathString);
     FileStatus stat = fs.getFileStatus(file);
-    assertThat(stat.getPath().toUri().getPath(), is("/dir/file"));
+    assertThat(stat.getPath().toUri().getPath(), is(pathString));
     assertThat(stat.isDirectory(), is(false));
     assertThat(stat.getLen(), is(7L));
     assertThat(stat.getModificationTime(),

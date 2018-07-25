@@ -22,6 +22,7 @@ public class FileSystemGlobTest {
   
   @Before
   public void setUp() throws Exception {
+    System.setProperty("hadoop.home.dir","F:\\cuixueyong\\install\\hadoop\\hadoop-2.7.6");
     fs = FileSystem.get(new Configuration());
     fs.mkdirs(new Path(BASE_PATH, "2007/12/30"));
     fs.mkdirs(new Path(BASE_PATH, "2007/12/31"));
@@ -31,7 +32,7 @@ public class FileSystemGlobTest {
   
   @After
   public void tearDown() throws Exception {
-    fs.delete(new Path(BASE_PATH), true);
+  //  fs.delete(new Path(BASE_PATH), true);
   }
   
   @Test
