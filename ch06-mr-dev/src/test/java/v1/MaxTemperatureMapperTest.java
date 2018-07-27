@@ -3,11 +3,19 @@ package v1;
 // == MaxTemperatureMapperTestV1Missing
 // vv MaxTemperatureMapperTestV1
 import java.io.IOException;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.*;
 import org.apache.hadoop.mrunit.mapreduce.MapDriver;
 import org.junit.*;
 
 public class MaxTemperatureMapperTest {
+  @Before
+  public void setUp() throws Exception {
+    System.setProperty("hadoop.home.dir","F:\\cuixueyong\\install\\hadoop\\hadoop-2.7.6");
+  }
 
   @Test
   public void processesValidRecord() throws IOException, InterruptedException {

@@ -93,7 +93,12 @@ public class AvroTest {
       // expected
     }
   }
-  
+
+  /**
+   * 01 往StringPair.avsc格式设置数据并且读取数据
+   *
+   * @throws IOException
+   */
   @Test
   public void testPairGeneric() throws IOException {
 // vv AvroParseSchema
@@ -124,8 +129,10 @@ public class AvroTest {
     Decoder decoder = DecoderFactory.get().binaryDecoder(out.toByteArray(),
       null);
     GenericRecord result = reader.read(null, decoder);
-    assertThat(result.get("left").toString(), is("L"));
-    assertThat(result.get("right").toString(), is("R"));
+    System.out.println(result.get("left").toString());
+    System.out.println(result.get("right").toString());
+   // assertThat(result.get("left").toString(), is("L"));
+  //  assertThat(result.get("right").toString(), is("R"));
 // ^^ AvroGenericRecordDeserialization
   }
 

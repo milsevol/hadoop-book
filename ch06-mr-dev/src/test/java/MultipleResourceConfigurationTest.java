@@ -42,14 +42,18 @@ public class MultipleResourceConfigurationTest {
 
     // variable expansion with system properties
     // vv MultipleResourceConfigurationTest-SystemExpansion
+    // 系统设置的高于xml设置的
     System.setProperty("size", "14");
     assertThat(conf.get("size-weight"), is("14,heavy"));
+    System.out.println("size-weight---"+conf.get("size-weight"));
     // ^^ MultipleResourceConfigurationTest-SystemExpansion
 
     // system properties are not picked up
     // vv MultipleResourceConfigurationTest-NoSystemByDefault
     System.setProperty("length", "2");
     assertThat(conf.get("length"), is((String) null));
+    // 系统设置的属性等于高于xml设置的属性，但是xml如果没有设置，那么系统设置的属性无效
+    System.out.println("length---"+conf.get("length"));
     // ^^ MultipleResourceConfigurationTest-NoSystemByDefault
 
   }
